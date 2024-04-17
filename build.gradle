@@ -42,8 +42,8 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-//flyway {
-	//url = 'jdbc:mysql://localhost:3306/n'
-	//user = 'root'
-	//password = ''
-//}
+flyway {
+	url = 'jdbc:mysql://localhost:3306/n'
+	user = 'root'
+	password = ''
+}
