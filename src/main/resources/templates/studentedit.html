@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>変更</title>
+</head>
+<body>
+<form method="post" th:action="@{/studentedit}">
+            <table class="table table-bordered table-hover">
+	<input type="hidden" th;field="*{id}">
+
+
+   <a>学生編集フォーム</a>
+   				<tr>
+                   
+                    <td>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="id" name="id" th:value="${student.id}" >
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="active">学生番号</th>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="no" name="no" th:value="${student.No}" readonly/>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="active">入学年度</th>
+                    <td>
+					    <input type="text" id="entYear" name="entYear" th:value="${student.entYear}" readonly/>
+      						<!--
+      						<option value="">------------------------------------</option>
+      						<option value="2022">2022年度入学</option>
+      						<option value="2023">2023年度入学</option>
+      						<option value="2024">2024年度入学</option>
+      						<option value="2025">2025年度入学</option>
+      						<option value="2026">2026年度入学</option>
+      						<option value="2027">2027年度入学</option>
+      						<option value="2028">2028年度入学</option>
+      						<option value="2029">2029年度入学</option>
+      						<option value="2030">2030年度入学</option>     						
+    					</select>
+    					-->
+                    </td>
+                </tr>
+                <tr>
+                    <th class="active">学生名(最大10桁)</th>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id ="name" name="name" th:value="${student.name}" maxlength="10" required/>
+                        </div>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <th class="active">クラス番号(最大3桁)</th>
+                    <td>
+                        <div class="form-group">
+                            <input type="" class="form-control" id="classNum" name="classNum" th:value="${student.classNum}" maxlength="3"/>
+                        </div>
+               		</td>
+               	</tr>
+                <tr>
+                    <th class="active">在学中フラグ</th>
+                    <td>
+					    <select id="isAttend" name="isAttend" th:value="${student.isAttend}"  required>
+      						<option value="">------------------------------------</option>
+      						<option value="true">在学中</option>
+      						<option value="false">退学中</option>
+
+    					</select> 
+               		</td>
+               	</tr>
+               	<tr>
+                    <th class="active">学校コード(最大3桁)</th>
+                    <td>
+                        <div class="form-group">
+                            <input type="" class="form-control" id="schoolCd" name="schoolCd" maxlength="3" th:value="${student.schoolCd}"  required>
+                        </div>
+               		</td>
+               	</tr>
+
+
+             	
+            		
+            		
+	</table>
+	<button class="btn btn-primary" type="submit">更新</button>
+	</form>
+	<a class="nav-link" th:href="@{'/studentlist'}"><p>一覧に戻る</p></a>
+</body>
+</html>
