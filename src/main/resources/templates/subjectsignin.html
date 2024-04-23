@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<title>新規作成</title>
+</head>
+<body>
+<a>学科登録フォーム</a>   
+<form class="form py-4 needs-validation h-ad" method="post" th:action="@{/subjectsignin}" th:object="${subject}">
+            <table class="table table-bordered table-hover">
+               <tr>
+                    <th class="active">科目コード</th>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id ="cd" name="cd" maxlength="3" required>
+                        </div>
+                    </td>
+                </tr>
+                 <tr>
+                    <th class="active">科目名</th>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id ="name" name="name" maxlength="20" required>
+                        </div>
+                    </td>
+                </tr>
+            </table>   
+                <input type="submit" class="btn btn-primary"value="科目登録"/>
+</form>
+                <a class="nav-link" th:href="@{'/'}"><p>topページに戻る</p></a>
+</body>
+
+
+</html>

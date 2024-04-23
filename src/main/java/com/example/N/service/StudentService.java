@@ -47,4 +47,41 @@ public class StudentService{
 	    	
 	        studentRepository.save(studentModel);
 	    }
+	  //検索機能
+
+	    public List<StudentModel> Studentsearch(Integer entYear, String classNum, Boolean isAttend) {
+
+	    List<StudentModel> student = studentRepository.findAll();
+
+	    //入学年度
+
+	    if (entYear!=null) {
+
+	    student = studentRepository.findStudentByEntYear(entYear);
+
+	    }
+
+	    // クラス番号
+
+	    if (classNum != null && !classNum.isEmpty()) {
+
+	    List<StudentModel> classNumStudents = studentRepository.findStudentByClassNum(classNum);
+
+	    student.retainAll(classNumStudents);
+
+	    }
+
+	    // 在学状況で絞り込み
+
+	    if (isAttend != null) {
+
+	    List<StudentModel> isAttendStudents = studentRepository.findStudentByIsAttend(isAttend);
+
+	    student.retainAll(isAttendStudents);
+
+	    }
+
+	    return student;
+
+	    }
 }

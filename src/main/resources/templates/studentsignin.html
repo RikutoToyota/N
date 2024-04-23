@@ -5,7 +5,7 @@
 <title>新規作成</title>
 </head>
 <body>
-<form method="post" th:action="@{/studentsignin}" th:object="${studentRequest}">
+<form method="post" th:action="@{/studentsignin}" th:object="${student}">
             <table class="table table-bordered table-hover">
 
 
@@ -32,7 +32,9 @@
                 <tr>
                     <th class="active">入学年度</th>
                     <td>
-					    <select id="entYear" name="entYear" >
+					    
+    					
+                    <select id="entYear" name="entYear" >
       						<option value="">------------------------------------</option>
       						<option value="2022">2022年度入学</option>
       						<option value="2023">2023年度入学</option>
@@ -42,38 +44,41 @@
       						<option value="2027">2027年度入学</option>
       						<option value="2028">2028年度入学</option>
       						<option value="2029">2029年度入学</option>
-      						<option value="2030">2030年度入学</option>     						
-    					</select>
+      						<option value="2030">2030年度入学</option>  
+      						</select>   
+      						</td>						
+                </tr>
+                 <tr>
+                    <th class="active">クラス番号</th>
+                    <td>
+					    	
+    					<select id="classNum" name="classNum" >
+      						<option value="">------------------------------------</option>
+      						<option value="101">101</option>
+      						<option value="102">102</option>
+      						<option value="103">103</option>
+      						<option value="104">104</option>
+      						<option value="201">201</option>
+      						<option value="202">202</option>
+      						<option value="203">203</option>
+      						<option value="204">204</option>
+      						<option value="301">301</option>
+      						<option value="302">302</option>
+      						<option value="303">303</option>
+      						<option value="304">304</option>
+      						</select>
+      				</td>	
+                </tr>
+
+
+			<tr>
+                   
+                    <td>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="isAttend" name="isAttend" value="true" >
+                        </div>
                     </td>
                 </tr>
-                <tr>
-                    <th class="active">クラス番号(最大3桁)</th>
-                    <td>
-                        <div class="form-group">
-                            <input type="" class="form-control" id="classNum" name="classNum" maxlength="3" required>
-                        </div>
-               		</td>
-               	</tr>
-                <tr>
-                    <th class="active">在学中フラグ</th>
-                    <td>
-					    <select id="isAttend" name="isAttend"  required>
-      						<option value="">------------------------------------</option>
-      						<option value="true">在学中</option>
-      						<option value="false">退学中</option>
-
-    					</select> 
-               		</td>
-               	</tr>
-               	                <tr>
-                    <th class="active">学校コード(最大3桁)</th>
-                    <td>
-                        <div class="form-group">
-                            <input type="" class="form-control" id="schoolCd" name="schoolCd" maxlength="3"  required>
-                        </div>
-               		</td>
-               	</tr>
-
              	
             		
             		

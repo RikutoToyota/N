@@ -6,6 +6,65 @@
 </head>
 <body>
 	<h2>学生一覧</h2>
+	<form th:action="@{studentsearch}" method="post">
+<table>
+<tr>
+<th class="active">入学年度</th>
+<td>
+<select id="entYear" name="entYear">
+<!-- 入学年度のオプション -->
+<option value="">------------------------------------</option>
+<option value="2022">2022年度入学</option>
+<option value="2023">2023年度入学</option>
+<option value="2024">2024年度入学</option>
+<option value="2025">2025年度入学</option>
+<option value="2026">2026年度入学</option>
+<option value="2027">2027年度入学</option>
+<option value="2028">2028年度入学</option>
+<option value="2029">2029年度入学</option>
+<option value="2030">2030年度入学</option>
+</select>
+</td>
+
+```
+                <th class="active">クラス番号</th>
+                <td>
+                        <select id="classNum" name="classNum">
+						<option value="">------------------------------------</option>
+  						<option value="101">101</option>
+  						<option value="102">102</option>
+  						<option value="103">103</option>
+  						<option value="104">104</option>
+  						<option value="201">201</option>
+  						<option value="202">202</option>
+  						<option value="203">203</option>
+  						<option value="204">204</option>
+  						<option value="301">301</option>
+  						<option value="302">302</option>
+  						<option value="303">303</option>
+  						<option value="304">304</option>
+
+           		</td>
+
+        <th class="active">在学中フラグ</th>
+        <td>
+            <select id="isAttend" name="isAttend" >
+                <!-- 在学中フラグのオプション -->
+  						<option value="">------------------------------------</option>
+  						<option value="true">在学中</option>
+  						<option value="false">退学中</option>
+            </select>
+        </td>
+
+        <td>
+            <button class="btn btn-primary" type="submit">検索</button>
+        </td>
+    </tr>
+</table>
+
+```
+
+</form>
      <table class="table">
 		 <thead>
 			 <tr>
@@ -28,6 +87,21 @@
 					<td th:text="${student.schoolCd}"></td>
 					<td><a  class="btn btn-success" th:href="@{/studentedit-(id=*{student.id})}">編集</a></td>
 			 </tr>
+			 <tr th:if="${not #lists.isEmpty(searchedStudents)}" th:each="student : ${searchedStudents}"><!--検索結果を表示-->
+                <td th:text="${student.entYear}"></td>
+                <td th:text="${student.No}"></td>
+                <td th:text="${student.name}"></td>
+                <td th:text="${student.classNum}"></td>
+				<td th:text="${student.isAttend != null && student.isAttend ? '◯' : (student.isAttend != null && !student.isAttend ? '✕' : '✕')}"></td>
+				<td th:text="${student.schoolCd}"></td>
+                <td><a  class="btn btn-success" th:href="@{/studentedit-(id=*{student.id})}">編集</a></td>
+<!--                <td>-->
+<!--                   <form th:action="@{/students/list}" method="post">-->
+<!--                       <input type="hidden" name="no" th:value="${student.no}">-->
+<!--                       <button onclick="return confirm('削除しますか？')">削除</button>-->
+<!--                   </form>-->
+<!--                </td>-->
+            </tr>
 		 </tbody>
 	 </table>
 	 <a class="nav-link" th:href="@{'/'}"><p>topページに戻る</p></a>

@@ -2,6 +2,9 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.2.4'
 	id 'io.spring.dependency-management' version '1.1.4'
+	id 'org.flywaydb.flyway' version '10.7.2'
+	
+	
 }
 
 group = 'com.example'
@@ -35,15 +38,23 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-
+// https://mvnrepository.com/artifact/org.flywaydb/flyway-core
+    implementation 'org.flywaydb:flyway-core:10.7.2'
+    // https://mvnrepository.com/artifact/org.flywaydb/flyway-mysql
+    
+    implementation 'org.flywaydb:flyway-mysql:10.7.2'
+    // https://mvnrepository.com/artifact/org.webjars/bootstrap
+    implementation 'org.webjars:bootstrap:5.3.3'
+    // https://mvnrepository.com/artifact/org.webjars/webjars-locator
+    implementation 'org.webjars:webjars-locator:0.50'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
-//flyway {
-	//url = 'jdbc:mysql://localhost:3306/n'
-	//user = 'root'
-	//password = ''
-//}
+flyway {
+	url = 'jdbc:mysql://localhost:3306/n'
+	user = 'root'
+	password = ''
+}

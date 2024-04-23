@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1 class="h3 mb-3 fw-normal">ログイン</h1>
+    	<form method="post" th:action="@{/login}">
+    	<label for="address">id</label>
+    	<input type="text" id="teacherId" name="teacherId" required>
+    	<label for="password">パスワード</label>
+    	<input type="password" id="password" name="password" required>
+    	<button class="btn btn-primary w-100 py-2" type="submit">ログイン</button>
+    	
+
+  </form>
+		
+</body>
+</html>

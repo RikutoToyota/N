@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>学科一覧</h2>
+     <table class="table">
+		 <thead>
+			 <tr>
+				 <th>科目コード</th>
+				 <th>科目名</th>
+				 </tr>
+		</thead>
+		<tbody>
+			<tr th:each="subject : ${subjects}">
+					<td th:text="${subject.cd}"></td>
+	                <td th:text="${subject.name}"></td>
+	                <td><a  class="btn btn-success" th:href="@{/subjectedit-(id=*{subject.id})}">編集</a></td>
+	                <td>
+                        <form th:action="@{/subjectsignin/deleteSubject/{id}(id=${subject.id})}" method="post" style="display: inline;">
+                            <input type="hidden" name="_method" value="delete">
+                            <button type="submit" class="btn btn-delete">削除</button>
+                        </form>
+                    </td>
+		</tbody>
+		</table>
+		<a class="nav-link" th:href="@{'/'}"><p>topページに戻る</p></a>
+</body>
+</html>
