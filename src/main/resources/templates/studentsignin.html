@@ -32,7 +32,7 @@
                 <tr>
                     <th class="active">入学年度</th>
                     <td>
-					    <select id="entYear" name="entYear" >
+					    <select id="entYear" name="entYear" required>
       						<option value="">------------------------------------</option>
       						<option value="2022">2022年度入学</option>
       						<option value="2023">2023年度入学</option>
@@ -47,24 +47,30 @@
                     </td>
                 </tr>
                 <tr>
-                    <th class="active">クラス番号(最大3桁)</th>
+                    <th class="active">クラス番号</th>
                     <td>
-                        <div class="form-group">
-                            <input type="" class="form-control" id="classNum" name="classNum" maxlength="3" required>
-                        </div>
+                            <select id="classNum" name="classNum" required>
+							<option value="">------------------------------------</option>
+      						<option value="100">100クラス</option>
+      						<option value="101">101クラス</option>
+      						<option value="102">102クラス</option>
+      						<option value="103">103</option>
+      						<option value="104">104</option>
+      						<option value="105">105</option>
+      						<option value="106">106</option>
+      						<option value="200">200</option>
+      						<option value="201">201</option>								
+
                		</td>
                	</tr>
                 <tr>
-                    <th class="active">在学中フラグ</th>
+                   
                     <td>
-					    <select id="isAttend" name="isAttend"  required>
-      						<option value="">------------------------------------</option>
-      						<option value="true">在学中</option>
-      						<option value="false">退学中</option>
-
-    					</select> 
-               		</td>
-               	</tr>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="isAttend" name="isAttend" value="true" >
+                        </div>
+                    </td>
+                </tr>
                	                <tr>
                     <th class="active">学校コード(最大3桁)</th>
                     <td>

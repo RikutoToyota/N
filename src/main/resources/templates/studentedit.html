@@ -57,11 +57,19 @@
 
 
                 <tr>
-                    <th class="active">クラス番号(最大3桁)</th>
+                    <th class="active">クラス番号</th>
                     <td>
-                        <div class="form-group">
-                            <input type="" class="form-control" id="classNum" name="classNum" th:value="${student.classNum}" maxlength="3"/>
-                        </div>
+                            <select id="classNum" name="classNum">
+      						<option value="100">100クラス</option>
+      						<option value="101">101クラス</option>
+      						<option value="102">102クラス</option>
+      						<option value="103">103</option>
+      						<option value="104">104</option>
+      						<option value="105">105</option>
+      						<option value="106">106</option>
+      						<option value="200">200</option>
+      						<option value="201">201</option>								
+
                		</td>
                	</tr>
                 <tr>
