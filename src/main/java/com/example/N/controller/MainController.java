@@ -4,20 +4,32 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.N.model.StudentModel;
+import com.example.N.model.SubjectModel;
+import com.example.N.model.TestModel;
 import com.example.N.service.StudentService;
+import com.example.N.service.SubjectService;
+import com.example.N.service.TestService;
 
 @Controller
 public class MainController {
 	@Autowired
 	StudentService studentService;
+	@Autowired
+	SubjectService subjectService;
+	@Autowired
+	TestService testService;
+	
 	//トップ
 	@GetMapping("/")
 	public String top() {
@@ -34,12 +46,14 @@ public class MainController {
 	@GetMapping("/studentsignin")
 	public String studentsignin(Model model) {
 		model.addAttribute("studentModel", new StudentModel());
+
 		return "studentsignin";
 	}
 	//学生登録
 	@PostMapping("/studentsignin")
 	public String touroku(@ModelAttribute StudentModel studentModel){
-		  studentService.saveStudent(studentModel);
+		
+		studentService.saveStudent(studentModel);
 		return "redirect:/";
 	}
 	//学生データ変更機能
@@ -49,18 +63,20 @@ public class MainController {
 	        model.addAttribute("student", student);
 	        return "studentedit";
 		}
-	
+	//学生検索
 	@PostMapping("/studentedit")
     public String updateStudent(@ModelAttribute("student")  StudentModel studentModel) {
 	    studentService.updateStudent(studentModel);
         return "redirect:/studentlist";
     }
+
 	
 	@GetMapping("/studentsearch")
 	public ResponseEntity<List<StudentModel>> Studentsearch(
             @RequestParam(value = "entYear", required = false) Integer entYear,
             @RequestParam(value = "classNum", required = false) String classNum,
             @RequestParam(value = "isAttend", required = false) Boolean isAttend) {
+
 
         List<StudentModel> result = studentService.Studentsearch(entYear, classNum, isAttend);
         return ResponseEntity.ok(result);
@@ -89,4 +105,97 @@ public class MainController {
 	public String  loginfrom() {
 		return "top";
 	}
+	
+
+
+
+
+	
+	//科目登録フォーム
+		@GetMapping("/subjectsignin")
+		public String subjectsignin(Model model) {
+			model.addAttribute("SubjectModel" , new SubjectModel());
+			return "subjectsignin";
+		}
+		//科目登録
+		@PostMapping("/subjectsignin")
+		public String touroku2(@ModelAttribute SubjectModel subjectModel){
+			subjectModel.setSchoolCd("aaa");
+			  subjectService.saveSubject(subjectModel);
+			return "redirect:/";
+		}
+		//科目一覧
+		@GetMapping("/subjectlist")
+			public String getAllsubjects(Model model) {
+			List<SubjectModel> subjects = subjectService.getAllSubjects();
+			model.addAttribute("subjects", subjects);
+			return "subjectlist";
+		}
+		//科目データ変更機能
+		@GetMapping("/subjectedit-{id}")
+		    public String showUpdateSubjectForm(@RequestParam Long id, Model model) {
+		        SubjectModel subject = subjectService.getSubjectById(id);
+		        model.addAttribute("subject", subject);
+		        return "subjectedit";
+			}
+		
+		@PostMapping("/subjectedit")
+	    public String updateSubject(@ModelAttribute("subject")  SubjectModel subjectModel) {
+			subjectModel.setSchoolCd("aaa");
+			subjectService.updateSubject(subjectModel);
+	        return "redirect:/subjectlist";
+	    }
+		//削除機能
+		@PostMapping("/subjectsignin/deleteSubject/{id}")
+		public String deleteSubject(@PathVariable Long id) {
+			subjectService.deleteSubject(id);
+			return "redirect:/subjectlist";
+		}
+		
+
+		// コントローラーのクラス内に追加
+		@ModelAttribute("loggedInUsername")
+		public String loggedInUsername() {
+		    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		    return authentication.getName();
+		}
+		
+		
+		@GetMapping("/testsignin")
+		public String getAllTest(Model model) {
+			List<TestModel> test = testService.getAllTest();
+			model.addAttribute("test", test);
+			List<StudentModel> students = studentService.getAllStudents();
+			model.addAttribute("students", students);
+			List<SubjectModel> subjects = subjectService.getAllSubjects();
+			model.addAttribute("subjects", subjects);
+			
+			return "testsignin";
+			}
+		
+		@PostMapping("/testsignin")
+		public String touroku3(@ModelAttribute TestModel testModel){
+			
+			testService.saveTest(testModel);
+			return "redirect:/";
+		}
+		
+		@GetMapping("/testreference")
+		public String getAllTestReference(Model model) {
+			System.out.println("0");
+			List<TestModel> test = testService.getAllTest();
+			System.out.println("1");
+			model.addAttribute("test", test);
+			System.out.println("2");
+			List<StudentModel> students = studentService.getAllStudents();
+			model.addAttribute("students", students);
+			System.out.println(students);
+			System.out.println("3");
+			List<SubjectModel> subjects = subjectService.getAllSubjects();
+			model.addAttribute("subjects", subjects);
+			System.out.println("4");
+		 return "testreference";
 	}
+		
+}
+

@@ -8,12 +8,37 @@
 <h1 class="h3 mb-3 fw-normal">ログイン</h1>
     	<form method="post" th:action="@{/login}">
     	<label for="address">id</label>
-    	<input type="text" id="teacherId" name="teacherId" required>
+    	<input type="text" id="teacherId" name="teacherId" required title="idまたはパスワードが確認できませんでした">
     	<label for="password">パスワード</label>
-    	<input type="password" id="password" name="password" required>
+    	<input type="password" id="password" name="password" required title="idまたはパスワードが確認できませんでした">
     	<button class="btn btn-primary w-100 py-2" type="submit">ログイン</button>
 
 
+
   </form>
+  <script>
+    // フォームのsubmitイベントを監視し、未入力の場合にカスタムエラーメッセージを表示する
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        var teacherIdField = document.getElementById('teacherId');
+        var passwordField = document.getElementById('password');
+
+        // idフィールドが未入力の場合
+        if (!teacherIdField.value) {
+            teacherIdField.setCustomValidity('idを入力してください');
+        } else {
+            teacherIdField.setCustomValidity('');
+        }
+
+        // パスワードフィールドが未入力の場合
+        if (!passwordField.value) {
+            passwordField.setCustomValidity('パスワードを入力してください');
+        } else {
+            passwordField.setCustomValidity('');
+        }
+    });
+</script>
+<!--  <p style="color: red;">idまたはパスワードが確認できませんでした。</p>-->
+		
+
 </body>
 </html>

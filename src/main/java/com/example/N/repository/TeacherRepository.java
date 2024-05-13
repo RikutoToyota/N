@@ -7,5 +7,9 @@ import com.example.N.model.TeacherModel;
 public interface TeacherRepository extends JpaRepository<TeacherModel, Long> {
     TeacherModel findByTeacherIdAndPassword(String teacherId, String password);
     TeacherModel findByTeacherIdEquals(String teacherId);
+	static TeacherModel findByTeacherId(String username) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 }
 

@@ -59,10 +59,11 @@
                 <tr>
                     <th class="active">クラス番号</th>
                     <td>
-                            <select id="classNum" name="classNum">
-      						<option value="100">100クラス</option>
-      						<option value="101">101クラス</option>
-      						<option value="102">102クラス</option>
+                            <select id="classNum" name="classNum" th:value="${student.classNum}"   required>
+							<option th:value="${student.classNum}"></option>
+      						<option value="100">100</option>
+      						<option value="101">101</option>
+      						<option value="102">102</option>
       						<option value="103">103</option>
       						<option value="104">104</option>
       						<option value="105">105</option>
@@ -82,20 +83,7 @@
 
     					</select> 
                		</td>
-               	</tr>
-               	<tr>
-                    <th class="active">学校コード(最大3桁)</th>
-                    <td>
-                        <div class="form-group">
-                            <input type="" class="form-control" id="schoolCd" name="schoolCd" maxlength="3" th:value="${student.schoolCd}"  required>
-                        </div>
-               		</td>
-               	</tr>
-
-
-             	
-            		
-            		
+               	</tr>	
 	</table>
 	<button class="btn btn-primary" type="submit">更新</button>
 	</form>

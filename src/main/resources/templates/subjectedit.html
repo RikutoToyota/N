@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>変更</title>
+</head>
+<body>
+<form method="post" th:action="@{/subjectedit}">
+            <table class="table table-bordered table-hover">
+	<input type="hidden" th;field="*{id}">
+
+
+   <a>学科編集フォーム</a>
+   				<tr>
+                   
+                    <td>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="id" name="id" th:value="${subject.id}" >
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="active">科目コード</th>
+                    <td>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="cd" name="cd" th:value="${subject.cd}" readonly/>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="active">科目名(最大20桁)</th>
+                    <td>
+                        <div class="form-group">
+                            <input type="" class="form-control" id="name" name="name" th:value="${subject.name}" maxlength="20" required/>
+                        </div>
+               		</td>
+               	</tr>
+                <tr>
+                
+
+
+             	
+            		
+            		
+	</table>
+	<button class="btn btn-primary" type="submit">更新</button>
+	</form>
+	<a class="nav-link" th:href="@{'/subjectlist'}"><p>一覧に戻る</p></a>
+</body>
+</html>

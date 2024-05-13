@@ -14,3 +14,6 @@ public interface StudentRepository extends JpaRepository<StudentModel, Long> {
 	List<StudentModel> findStudentByIsAttend(Boolean isAttend);
 }
 
+
+
+

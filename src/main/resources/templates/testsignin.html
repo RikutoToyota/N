@@ -2,11 +2,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>成績管理</title>
 </head>
 <body>
-	<h2>学生一覧</h2>
-	<form th:action="@{studentsearch}" method="post">
+<h2>成績管理</h2>
+<form th:action="@{testsignin}" method="post">
 
     <table>
         <tr>
@@ -45,13 +45,23 @@
                		</td>
                	
             
-            <th class="active">在学中フラグ</th>
+            <th class="active">科目</th>
             <td>
                 <select id="isAttend" name="isAttend" >
                     <!-- 在学中フラグのオプション -->
       						<option value="">------------------------------------</option>
-      						<option value="true">在学中</option>
-      						<option value="false">退学中</option>
+      						<option value="国語">国語</option>
+      						<option value="数学">数学</option>
+                </select>
+            </td>
+            
+            <th class="active">回数</th>
+            <td>
+                <select id="isAttend" name="isAttend" >
+                    <!-- 在学中フラグのオプション -->
+      						<option value="">------------------------------------</option>
+      						<option value="1">1</option>
+      						<option value="2">2</option>
                 </select>
             </td>
             
@@ -61,54 +71,42 @@
         </tr>
     </table>
 </form>
-
-          
-
-
-
-
-
-     <table class="table">
-		 <thead>
+<form th:action="@{'/testsignin'}" method="post">
+	<table>
+	<thead>
 			 <tr>
 				 <th>入学年度</th>
+				 <th>クラス番号</th>
 				 <th>学生番号</th>
 				 <th>学生名</th>
-				 <th>クラス番号</th>
-				 <th>在学中</th>
-				 <th>学校コード</th>
+				 <th>点数</th>
+
 				 </th>
 			 </tr>
 		 </thead>
+		 
+		  <tbody>
+			  
+			    <tr th:each="test : ${test}">
+					<td th:text="${test.student.entYear}"></td>
+					<td th:text="${test.student.classNum}"></td>
+					<td th:text="${test.student.No}"></td>
+					<td th:text="${test.student.name}"></td>
+					<td>
+						<input type="hidden" id ="classNum" name="classNum" th:value="${test.student.classNum}">
+                        <input type="text"id ="point" name="point" th:value="${test.point}"/>
+                        
+                    </td>
+                    
+				</tr>
+        </tbody>
+        	
+	</table>
+	<button class="btn btn-primary" type="submit">登録して終了</button>
+			</form>
+	 
 		 <tbody>
-			 <tr th:each="student : ${students}">
-					<td th:text="${student.entYear}"></td>
-	                <td th:text="${student.No}"></td>
-	                <td th:text="${student.name}"></td>
-					<td th:text="${student.classNum}"></td>
-					<td th:text="${student.isAttend != null && student.isAttend ? '◯' : (student.isAttend != null && !student.isAttend ? '✕' : '✕')}"></td>
-					<td th:text="${student.schoolCd}"></td>
-					<td><a  class="btn btn-success" th:href="@{/studentedit-(id=*{student.id})}">編集</a></td>
-					
-			 </tr>
-
-			 
-			 <tr th:if="${not #lists.isEmpty(searchedStudents)}" th:each="student : ${searchedStudents}"><!--検索結果を表示-->
-                <td th:text="${student.entYear}"></td>
-                <td th:text="${student.No}"></td>
-                <td th:text="${student.name}"></td>
-                <td th:text="${student.classNum}"></td>
-				<td th:text="${student.isAttend != null && student.isAttend ? '◯' : (student.isAttend != null && !student.isAttend ? '✕' : '✕')}"></td>
-				<td th:text="${student.schoolCd}"></td>
-                <td><a  class="btn btn-success" th:href="@{/studentedit-(id=*{student.id})}">編集</a></td>
-
-            </tr>
-            
-
-
-		 </tbody>
-	 </table>
+			
 	 <a class="nav-link" th:href="@{'/'}"><p>topページに戻る</p></a>
-	 <a class="nav-link" th:href="@{'/studentsignin'}"><p>新規登録</p></a>
 </body>
 </html>
