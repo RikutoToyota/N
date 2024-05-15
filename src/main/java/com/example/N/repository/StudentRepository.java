@@ -12,6 +12,7 @@ public interface StudentRepository extends JpaRepository<StudentModel, Long> {
 	List<StudentModel> findStudentByEntYear(Integer entYear);
 	List<StudentModel> findStudentByClassNum(String classNum);
 	List<StudentModel> findStudentByIsAttend(Boolean isAttend);
+	List<StudentModel> findByEntYearAndClassNum(Integer entYear,String classNum);
 }
 
 

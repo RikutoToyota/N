@@ -3,16 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>成績管理</title>
+
 </head>
 <body>
 <h2>成績管理</h2>
-<form th:action="@{testsignin}" method="post">
+<form th:action="@{/testsignin}" method="post"th:object="${hoge}">
 
     <table>
         <tr>
             <th class="active">入学年度</th>
             <td>
-                <select id="entYear" name="entYear">
+                <select id="entYear" name="entYear" required>
                     <!-- 入学年度のオプション -->
                     	<option value="">------------------------------------</option>
       						<option value="2022">2022年度入学</option>
@@ -30,7 +31,7 @@
             
                     <th class="active">クラス番号</th>
                     <td>
-                            <select id="classNum" name="classNum">
+                            <select id="classNum" name="classNum"required>
 							<option value="">------------------------------------</option>
       						<option value="100">100クラス</option>
       						<option value="101">101クラス</option>
@@ -47,21 +48,18 @@
             
             <th class="active">科目</th>
             <td>
-                <select id="isAttend" name="isAttend" >
-                    <!-- 在学中フラグのオプション -->
-      						<option value="">------------------------------------</option>
-      						<option value="国語">国語</option>
-      						<option value="数学">数学</option>
-                </select>
+                <select id="subjectCd" name="subject" class="form-select" required>      
+		             <option value="" disabled selected>科目</option>                                           
+		              <option th:each="subjectCd : ${subjects}" th:value="${subjectCd.name}" th:text="${subjectCd.name}">科目</option>                                         </select>
             </td>
             
             <th class="active">回数</th>
             <td>
-                <select id="isAttend" name="isAttend" >
+                <select id="isAttend" name="count" required>
                     <!-- 在学中フラグのオプション -->
       						<option value="">------------------------------------</option>
-      						<option value="1">1</option>
-      						<option value="2">2</option>
+      						<option value=1>1</option>
+      						<option value=2>2</option>
                 </select>
             </td>
             
@@ -71,7 +69,7 @@
         </tr>
     </table>
 </form>
-<form th:action="@{'/testsignin'}" method="post">
+<form th:action="@{'/testsignin2'}" method="post">
 	<table>
 	<thead>
 			 <tr>
@@ -87,15 +85,19 @@
 		 
 		  <tbody>
 			  
-			    <tr th:each="test : ${test}">
-					<td th:text="${test.student.entYear}"></td>
-					<td th:text="${test.student.classNum}"></td>
-					<td th:text="${test.student.No}"></td>
-					<td th:text="${test.student.name}"></td>
-					<td>
-						<input type="hidden" id ="classNum" name="classNum" th:value="${test.student.classNum}">
-                        <input type="text"id ="point" name="point" th:value="${test.point}"/>
-                        
+			    <tr th:each="test : ${studentList}">
+                    <td th:text="${test.entYear}"></td>
+                    <td th:text="${test.classNum}"></td>
+                    <td th:text="${test.No}"></td>
+                    <td th:text="${test.name}"></td>
+                    <td>
+						
+						<input type="hidden" id="no" name="no" th:value="${no}">
+<!--						<input type="hidden" id="schoolCd" name="schoolCd" th:value="${test.schoolCd}">-->
+						<input type="hidden" id="subjectCd" name="subjectCd" th:value="${subjectcd}">
+						<input type="hidden" id="studentNo" name="studentNo" th:value="${test.No}">
+                        <input type="hidden" id ="classNum" name="classNum" th:value="${test.classNum}">
+                        <input type="text"id ="point" name="point"/>
                     </td>
                     
 				</tr>

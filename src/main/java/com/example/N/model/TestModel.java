@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.Data;
 @Data
 @Entity
@@ -39,6 +41,8 @@ public class TestModel implements Serializable{
 	private Integer no;
 	
 	@Column(length = 10, nullable = false)
+	 @Min(value = 0, message = "0以上の値を入力してください")
+    @Max(value = 100, message = "100以下の値を入力してください")
 	private Integer point;
 	
 	@Column(length = 5, nullable = false)

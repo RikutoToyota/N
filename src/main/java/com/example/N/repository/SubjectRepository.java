@@ -7,5 +7,5 @@ import com.example.N.model.SubjectModel;
 
 @Repository
 public interface SubjectRepository extends JpaRepository<SubjectModel, Long>{
-	
+	SubjectModel findByName(String cd);
 }

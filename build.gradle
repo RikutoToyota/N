@@ -54,7 +54,7 @@ tasks.named('test') {
 }
 
 flyway {
-	url = 'jdbc:mysql://localhost:3306/n'
+	url = 'jdbc:mysql://localhost:3306/nomura'
 	user = 'root'
 	password = ''
 }

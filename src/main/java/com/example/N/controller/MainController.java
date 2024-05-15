@@ -52,9 +52,9 @@ public class MainController {
 	//学生登録
 	@PostMapping("/studentsignin")
 	public String touroku(@ModelAttribute StudentModel studentModel){
-		
+		studentModel.setSchoolCd("123");
 		studentService.saveStudent(studentModel);
-		return "redirect:/";
+		return "redirect:/kanryou";
 	}
 	//学生データ変更機能
 	@GetMapping("/studentedit-{id}")
@@ -120,9 +120,9 @@ public class MainController {
 		//科目登録
 		@PostMapping("/subjectsignin")
 		public String touroku2(@ModelAttribute SubjectModel subjectModel){
-			subjectModel.setSchoolCd("aaa");
+			subjectModel.setSchoolCd("123");
 			  subjectService.saveSubject(subjectModel);
-			return "redirect:/";
+			return "redirect:/kanryou";
 		}
 		//科目一覧
 		@GetMapping("/subjectlist")
@@ -141,7 +141,7 @@ public class MainController {
 		
 		@PostMapping("/subjectedit")
 	    public String updateSubject(@ModelAttribute("subject")  SubjectModel subjectModel) {
-			subjectModel.setSchoolCd("aaa");
+			subjectModel.setSchoolCd("123");
 			subjectService.updateSubject(subjectModel);
 	        return "redirect:/subjectlist";
 	    }
@@ -162,20 +162,30 @@ public class MainController {
 		
 		
 		@GetMapping("/testsignin")
-		public String getAllTest(Model model) {
-			List<TestModel> test = testService.getAllTest();
-			model.addAttribute("test", test);
-			List<StudentModel> students = studentService.getAllStudents();
-			model.addAttribute("students", students);
-			List<SubjectModel> subjects = subjectService.getAllSubjects();
-			model.addAttribute("subjects", subjects);
-			
+		public String getstudent(StudentModel studentModel, Model model ,SubjectModel subjectModel) {
+			model.addAttribute("hoge",studentModel);
+			model.addAttribute("subjects",this.subjectService.getAllSubjects());
 			return "testsignin";
 			}
-		
+	
 		@PostMapping("/testsignin")
-		public String touroku3(@ModelAttribute TestModel testModel){
-			
+		   public String studentlist(Model model,StudentModel studentmodel,SubjectModel subjectmodel,
+				   						@RequestParam("entYear")Integer entYear,
+				   						@RequestParam("classNum")String classNum,
+				   						@RequestParam("subject")String subject,
+				   						@RequestParam("count")Integer count) {
+				System.out.print(subject);
+				model.addAttribute("studentList",this.studentService.searchStudents2(entYear,classNum));
+				model.addAttribute("subjectname",subject);
+				model.addAttribute("count",count+"回目");
+				model.addAttribute("no",count);
+				model.addAttribute("subjectcd",this.subjectService.getsubjectcd(subject));
+				
+			return "testsignin";
+			}
+		@PostMapping("/testsignin2")
+		public String touroku3(TestModel testModel){
+			testModel.setSchoolCd("123");
 			testService.saveTest(testModel);
 			return "redirect:/";
 		}
@@ -196,6 +206,10 @@ public class MainController {
 			System.out.println("4");
 		 return "testreference";
 	}
-		
+		@GetMapping("/kanryou")
+		public String kanryou() {
+			return "kanryou";
+		}
+	
 }
 

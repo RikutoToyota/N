@@ -86,4 +86,9 @@ public class StudentService{
 
 
 	    }
+	    public List<StudentModel> searchStudents2(Integer entYear, String classNum) {
+			// TODO 自動生成されたメソッド・スタブ
+			return studentRepository.findByEntYearAndClassNum(entYear, classNum);
+			
+		}
 }

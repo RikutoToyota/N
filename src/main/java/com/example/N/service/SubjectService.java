@@ -41,4 +41,8 @@ public class SubjectService {
 	    	
 	        subjectRepository.save(subjectModel);
 	    }
+	    public String getsubjectcd(String cd) {
+	    	SubjectModel aaa = subjectRepository.findByName(cd);
+	    	return aaa.getCd();
+	    }
 }
