@@ -187,7 +187,7 @@ public class MainController {
 		public String touroku3(TestModel testModel){
 			testModel.setSchoolCd("123");
 			testService.saveTest(testModel);
-			return "redirect:/";
+			return "redirect:/kanryo";
 		}
 		
 		@GetMapping("/testreference")
